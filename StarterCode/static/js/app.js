@@ -30,6 +30,8 @@ function getPlot(id) {
             x: sampleValues,
             y: idOtu,
             text: labels,
+            marker: {
+                color: 'rbg(124,142,195)'},
             type:"bar",
             orientation: "h",
         };
@@ -45,8 +47,8 @@ function getPlot(id) {
             margin: {
                 l: 100,
                 r: 100,
-                t: 30,
-                b: 20
+                t: 100,
+                b: 100
             }
         };
 
@@ -67,8 +69,8 @@ function getPlot(id) {
 
         var layout = {
             xaxis:{title: "OTU ID"},
-            height: 600,
-            width: 1300
+            height: 500,
+            width: 1200
         };
 
         var data1 = [trace1];
@@ -92,19 +94,19 @@ function getPlot(id) {
 function getInfo(id) {
     d3.json("data/samples.json").then((data)=> {
         
-        var metadata = data.metadata;
+        var metaData = data.metaData;
 
         console.log(metadata)
 
-        var result = metadata.filter(meta => meta.id.toString() === id)[0];
+        var metaResult = metaData.filter(meta => meta.id.toString() === id)[0];
 
 
-        var demographic = d3.select("#sample-metadata");
+        var metaDemographic = d3.select("#sample-metadata");
         
-        demographic.html("");
+        metaDemographic.html("");
 
-        Object.entries(result).forEach((key) => {   
-                demographic.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
+        Object.entries(metaResult).forEach((key) => {   
+                metaDemographic.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
         });
     });
 }
@@ -115,13 +117,13 @@ function optionChanged(id) {
 }
 
 function init() {
-    var dropdown = d3.select("#selDataset");
+    var down = d3.select("#selDataset");
 
     d3.json("data/samples.json").then((data)=> {
         console.log(data)
 
         data.names.forEach(function(name) {
-            dropdown.append("option").text(name).property("value");
+            down.append("option").text(name).property("value");
         });
 
         getPlot(data.names[0]);
