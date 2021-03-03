@@ -1,3 +1,4 @@
+// Start plot
 function getPlot(id) {
     
     // get data from json file
@@ -38,7 +39,6 @@ function getPlot(id) {
 
         var data = [trace];
 
-        
         var layout = {
             title: "Top 10 OTU",
             yaxis:{
@@ -86,7 +86,6 @@ function getPlot(id) {
 
         var data = [tracePie]
         
-        
         Plotly.newPlot("gauge", data)
 
     });    
@@ -101,17 +100,16 @@ function getInfo(id) {
 
         var metaResult = metaData.filter(metaData => metaData.id.toString() === id)[0];
 
-
         var metaDemographic = d3.select("#sample-metadata");
         
-        metaDemographic.html("");
+        metaDemographic.html(" ");
 
         Object.entries(metaResult).forEach((key) => {   
                 metaDemographic.append("h5").text(key[0].toUpperCase() + " : " + key[1] + "\n");    
         });
     });
 }
-// set up init 
+// set up init rendering
 function init() {
     var down = d3.select("#selDataset");
 
