@@ -111,7 +111,7 @@ function getInfo(id) {
         });
     });
 }
-
+// set up init 
 function init() {
     var down = d3.select("#selDataset");
 
