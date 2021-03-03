@@ -3,7 +3,7 @@ function getPlot(id) {
     // get data from json file
     d3.json("StarterCode/samples.json").then((data)=> {
         console.log(data)
-// step 1
+        // step 1
         var wfreq = data.metadata.map(d => d.wfreq)
         console.log(`Washing Freq: ${wfreq}`)
 
@@ -91,6 +91,7 @@ function getPlot(id) {
 
     });    
 }
+// pull json
 function getInfo(id) {
     d3.json("data/samples.json").then((data)=> {
         
@@ -98,7 +99,7 @@ function getInfo(id) {
 
         console.log(metadata)
 
-        var metaResult = metaData.filter(meta => meta.id.toString() === id)[0];
+        var metaResult = metaData.filter(metaData => metaData.id.toString() === id)[0];
 
 
         var metaDemographic = d3.select("#sample-metadata");
@@ -106,14 +107,9 @@ function getInfo(id) {
         metaDemographic.html("");
 
         Object.entries(metaResult).forEach((key) => {   
-                metaDemographic.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
+                metaDemographic.append("h5").text(key[0].toUpperCase() + " : " + key[1] + "\n");    
         });
     });
-}
-
-function optionChanged(id) {
-    getPlot(id);
-    getInfo(id);
 }
 
 function init() {
