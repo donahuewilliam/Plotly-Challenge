@@ -113,20 +113,5 @@ function optionChanged(id) {
     getPlot(id);
     getInfo(id);
 }
-// // set up init rendering
-function init() {
-    var dropdown = d3.select("#selDataset");
-
-    d3.json("samples.json").then((data)=> {
-        console.log(data)
-
-        data.names.forEach(function(name) {
-            dropdown.append("option").text(name).property("value");
-        });
-
-        getPlot(data.names[0]);
-        getInfo(data.names[0]);
-    });
-}
 
 init();
