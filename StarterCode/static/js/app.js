@@ -1,8 +1,7 @@
-// Start plot
 function getPlot(id) {
     
     // get data from json file
-    d3.json("StarterCode/samples.json").then((data)=> {
+    d3.json("samples.json").then((data)=> {
         console.log(data)
         // start making variables for json
         var wfreq = data.metadata.map(d => d.wfreq)
@@ -67,7 +66,7 @@ function getPlot(id) {
 
         };
 
-        var layout = {
+        var layout1 = {
             xaxis:{title: "OTU ID"},
             height: 500,
             width: 1200
@@ -75,7 +74,7 @@ function getPlot(id) {
 
         var data1 = [trace1];
 
-        Plotly.newPlot("bubble", data1, layout); 
+        Plotly.newPlot("bubble", data1, layout1); 
 
         //  pie chart
         var tracePie = {
@@ -90,9 +89,10 @@ function getPlot(id) {
 
     });    
 }
-// pull json
+// // pull json
 function getInfo(id) {
-    d3.json("data/samples.json").then((data)=> {
+    d3.json("samples.json").then((data)=> {
+
         // variables for metadata
         var metaData = data.metaData;
 
@@ -102,22 +102,26 @@ function getInfo(id) {
 
         var metaDemographic = d3.select("#sample-metadata");
         
-        metaDemographic.html(" ");
+        metaDemographic.html("");
 
         Object.entries(metaResult).forEach((key) => {   
                 metaDemographic.append("h5").text(key[0].toUpperCase() + " : " + key[1] + " \n ");    
         });
     });
 }
-// set up init rendering
+function optionChanged(id) {
+    getPlot(id);
+    getInfo(id);
+}
+// // set up init rendering
 function init() {
-    var down = d3.select("#selDataset");
+    var dropdown = d3.select("#selDataset");
 
-    d3.json("data/samples.json").then((data)=> {
+    d3.json("samples.json").then((data)=> {
         console.log(data)
 
         data.names.forEach(function(name) {
-            down.append("option").text(name).property("value");
+            dropdown.append("option").text(name).property("value");
         });
 
         getPlot(data.names[0]);
